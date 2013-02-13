@@ -53,7 +53,7 @@ build: init
 #	$(EMACS23) $(BUILD)
 	rm -f wisent.output
 	emacs $(EMACS_ARGS) -f semantic-grammar-batch-build-packages .
-	cp *.wy *wy.el{,c} $(BUILD_DIST)
+	cp *.wy *wy.el *wy.elc $(BUILD_DIST)
 	emacs $(BUILD)
 
 .PHONY: test
