@@ -14,7 +14,7 @@ EMACS_ARGS=-batch -q --no-site-file  -l $(EL_INIT)
 
 #CEDET_DIR=c:/Program Files/emacs-22.3/site-lisp/cedet-1.0beta3b
 #CEDET_DIR=c:/Program Files/emacs-23.2/lisp/cedet
-CEDET_DIR=~/cedet-1.0pre7
+CEDET_DIR=../cedet/lisp
 #CEDET_DIR=~/cedet-1.0beta3b
 
 
