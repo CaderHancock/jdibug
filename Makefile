@@ -14,7 +14,7 @@ EMACS_ARGS=-batch -q --no-site-file  -l $(EL_INIT)
 
 #CEDET_DIR=c:/Program Files/emacs-22.3/site-lisp/cedet-1.0beta3b
 #CEDET_DIR=c:/Program Files/emacs-23.2/lisp/cedet
-CEDET_DIR=../cedet/lisp
+CEDET_DIR=~/cedet-1.0pre7
 #CEDET_DIR=~/cedet-1.0beta3b
 
 
@@ -53,7 +53,8 @@ build: init
 #	$(EMACS23) $(BUILD)
 	rm -f wisent.output
 	emacs $(EMACS_ARGS) -f semantic-grammar-batch-build-packages .
-	cp *.wy *wy.el *wy.elc $(BUILD_DIST)
+	cp *.wy $(BUILD_DIST)
+	cp *wy.el* $(BUILD_DIST)
 	emacs $(BUILD)
 
 .PHONY: test
@@ -73,19 +74,11 @@ init:
 
 	@echo '(defconst jdibug-build-directory  "'$(BUILD_DIST)'")' > $(EL_INIT)
 	@echo "(require 'cl)" >> $(EL_INIT)
-	@echo "(loop for dir in (file-expand-wildcards "'"'$(CEDET_DIR)'/*")' >> $(EL_INIT)
-	@echo "     do (add-to-list 'load-path dir))" >> $(EL_INIT)
-	@echo ';;(load-file "'$(CEDET_DIR)/cedet.el'")' >> $(EL_INIT)
-	@echo "(add-to-list 'load-path "'"'$(CEDET_DIR)'")' >> $(EL_INIT)
-	@echo '(load-file "'$(CEDET_DIR)/cedet/cedet.el'")' >> $(EL_INIT)
-	@echo '(load-file "'$(CEDET_DIR)/cedet/semantic.el'")' >> $(EL_INIT)
-	@echo '(load-file "'$(CEDET_DIR)/cedet/semantic/grammar.el'")' >> $(EL_INIT)
-	@echo '(load-file "'$(CEDET_DIR)/cedet/semantic/java.el'")' >> $(EL_INIT)
 	@echo "(require 'cedet)" >> $(EL_INIT)
-	@echo ';;(load-file (expand-file-name "'$(CEDET_DIR)/cedet/cedet.el'"))' >> $(EL_INIT)
+	@echo ';;(load-file (expand-file-name "'$(CEDET_DIR)/common/cedet.el'"))' >> $(EL_INIT)
 	@echo ";; (add-to-list 'load-path "'"'$(CEDET_DIR)/semantic'")' >> $(EL_INIT)
 	@echo "(require 'semantic)" >> $(EL_INIT)
-	@echo ";(require 'semantic-grammar)" >> $(EL_INIT)
+	@echo "(require 'semantic/grammar)" >> $(EL_INIT)
 	@echo "(setq wisent-verbose-flag t)" >> $(EL_INIT)
 	@echo '(defconst jdibug-release-major-version "'$(MAJOR_VERSION)'")' >> $(EL_INIT)
 	@echo '(defconst jdibug-release-minor-version "'$(MINOR_VERSION)'")' >> $(EL_INIT)
@@ -97,4 +90,3 @@ init:
 	@echo "(setq elunit-verbose t)" >> $(EL_TEST_INIT)
 	@echo ";; EOF" >> $(EL_TEST_INIT)
 # EOF
-
