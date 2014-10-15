@@ -32,7 +32,7 @@ JDE_TEST=$(EMACS_ARGS) -l $(EL_TEST_INIT) -l $(TEST_DIR)/jde-tests.el
 
 CYGWIN=[ "${OSTYPE}" = cygwin ]
 
-all: build test dist
+all: build dist
 
 .PHONY: dist
 dist: build doc
